@@ -1,6 +1,7 @@
 from datetime import datetime
 import os
 import argparse
+import time
 
 from dotenv import load_dotenv
 import bme680
@@ -36,13 +37,15 @@ data = {
     "gas_resistance": 21.0
 }
 
+# we wait for data to be available
+while sensor.get_sensor_data() is False or sensor.data.heat_stable is False:
+    time.sleep(1)
 
-if sensor.get_sensor_data():
-    data["temperature"] = float(format(sensor.data.temperature, "0.2f"))
-    data["pressure"] = float(format(sensor.data.pressure, "0.2f"))
-    data["humidity"] = float(format(sensor.data.humidity, "0.2f"))
-    data["gas_resistance"] = int(sensor.data.gas_resistance)
-    print(f"{data['temperature']} C, {data['pressure']} hPa, {data['humidity']} %RH, {data['gas_resistance']} Ohms")
+data["temperature"] = float(format(sensor.data.temperature, "0.2f"))
+data["pressure"] = float(format(sensor.data.pressure, "0.2f"))
+data["humidity"] = float(format(sensor.data.humidity, "0.2f"))
+data["gas_resistance"] = int(sensor.data.gas_resistance)
+print(f"{data['temperature']} C, {data['pressure']} hPa, {data['humidity']} %RH, {data['gas_resistance']} Ohms")
 
 load_dotenv()
 INFLUX_DB_URL = os.getenv("INFLUX_DB_URL")
