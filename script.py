@@ -44,7 +44,7 @@ while sensor.get_sensor_data() is False or sensor.data.heat_stable is False:
 data["temperature"] = float(format(sensor.data.temperature, "0.2f"))
 data["pressure"] = float(format(sensor.data.pressure, "0.2f"))
 data["humidity"] = float(format(sensor.data.humidity, "0.2f"))
-data["gas_resistance"] = int(sensor.data.gas_resistance)
+data["gas_resistance"] = float(int(sensor.data.gas_resistance))
 print(f"{data['temperature']} C, {data['pressure']} hPa, {data['humidity']} %RH, {data['gas_resistance']} Ohms")
 
 load_dotenv()
