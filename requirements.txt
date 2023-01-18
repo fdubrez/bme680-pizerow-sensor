@@ -1,3 +1,4 @@
 influxdb-client==1.29.1
 python-dotenv==0.20.0
 bme680==1.1.1
+requests==2.28.2

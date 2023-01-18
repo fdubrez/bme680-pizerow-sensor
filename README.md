@@ -15,6 +15,17 @@ python -m venv venv
 python -m pip install -r requirements.txt
 ```
 
-You must set a `.env` file with the right configuration to setup influxdb connectivity (dee `.env.template` file).
+You must set a `.env` file with the right configuration to setup influxdb connectivity (see `.env.template` file).
 
 Simply run `python script.py`
+
+## Save outside temperature
+
+Save outside temperature using openweather API.
+
+Windows powershell:
+
+```
+PS C:\Users\fdubrez\git\github\bme680-pizerow-sensor> $env:OPENWEATHER_APPID='******'; $env:INFLUX_DB_BUCKET='<bucket>'; $env:INFLUX_DB_URL='http://<IP>:8086'; $env:INFLUX_DB_ORG='<org>'; $env:INFLUX_DB_MEASUREMENT_LOCATION='exterior'; $env:INFLUX_DB_TOKEN='<token>'; python .\weather.py -lat <lat> -long <long> --store
+temperature is 3.08
+```
